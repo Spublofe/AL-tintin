@@ -1,0 +1,37 @@
+#split 0 0
+
+#variable {weapon1} {shield}
+#variable {weapon2} {spear}
+#variable {weapon1container} {backpack}
+#variable {weapon2container} {backpack}
+#variable {instrument} {cornupas}
+
+#variable {locktarget} {chest}
+#variable {st1} {horse}
+#variable {st2} {signpost}
+#variable {hcount} {0}
+
+#alias {zarm} {get ${weapon1} from ${weapon1container};get ${weapon2} from ${weapon2container};x held items}
+#alias {pas} {x held items;put ${weapon1} in ${weapon1container};put ${weapon2} in ${weapon2container};sheath held knife;put held items in backpack}
+#alias {tr} {get rock from here;throw rock at %1 %2}
+#alias {sp} {#var locktarget {%1 %2};pick ${locktarget} with pick}
+#alias {r1} {get file from backpack;get ${weapon1} from ${weapon1container};repair ${weapon1}}
+#alias {r2} {get file from backpack;get ${weapon2} from ${weapon2container};repair ${weapon2}}
+#alias {ri} {get file from backpack;get ${instrument} from backpack;repair ${instrument}}
+#alias {gfs} {get ${instrument} from backpack;x held ${instrument};play ${instrument} both briefly and furiously}
+#alias {pff} {x held ${instrument};play ${instrument} both briefly and furiously} 
+#alias {lal} {x u; x d;x nw;x n;x ne;x e;x se;x s;x sw;x w;x walls}
+#alias {retaliatestandard} {retaliate get ${weapon1} from ${weapon1container}&get ${weapon2} from ${weapon2container}&draw sword&mobilize&kill&examine held items}
+#alias {buybuttons} {#40 {buy 1 from basket;put button in sack}}
+#alias {ssh} {#var st1 %1;#var st2 %2;reveal;sneak ${st1};#var hcount 2}
+
+#action {You give up on the lock} {pick ${locktarget} with pick}
+#action {You finish repairing} {x held items}
+#action {You can't throw a smooth rock at} {discard held rock}
+#action {Your preparations for the summon daemon} {cast summon daemon}
+#action {Your preparations for the spring} {cast spring}
+#action {A pool of water begins to form here} {fill canteen from spring}
+#action {You stop in front of} #if {$hcount >0} {reveal;hide;#var hcount {$hcount - 1}}
+#action {You attempt to drop out of sight} #if {$hcount > 0} {reveal;sneak ${st2}} {#echo {HIDE PROCESS ENDED}}
+
+#session AL mud.accursed-lands.com 8000;#delay 7 {USERNAME;PASSWORD}
