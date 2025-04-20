@@ -28,9 +28,6 @@
 #action {You give up on the lock} {pick ${locktarget} with pick}
 #action {You finish repairing} {x held items}
 #action {You can't throw a smooth rock at} {discard held rock}
-#action {Your preparations for the summon daemon} {cast summon daemon}
-#action {Your preparations for the spring} {cast spring}
-#action {A pool of water begins to form here} {fill canteen from spring}
 #action {You stop in front of} #if {$hcount >0} {reveal;hide;#var hcount {$hcount - 1}}
 #action {You attempt to drop out of sight} #if {$hcount > 0} {reveal;sneak ${st2}} {#echo {HIDE PROCESS ENDED}}
 
